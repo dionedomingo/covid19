@@ -122,13 +122,13 @@
 
             },
             async loadIndex () {
-                const { data } = await this.$http.get(this.source + 'index.json').then(response => (this.index = response.data))
+                const { data } = await this.$http.get(this.source + 'index.json',{crossdomain:true}).then(response => (this.index = response.data))
             },
             async loadTimestamp (t) {
-                const { data } = await this.$http.get(this.source + t +'.json').then(response => (this.current = response.data.reverse()))
+                const { data } = await this.$http.get(this.source + t +'.json',{crossdomain:true}).then(response => (this.current = response.data.reverse()))
             },
             async loadSummary (t) {
-                const { data } = await this.$http.get(this.source + t +'-summary.json').then(response => (this.summary = response.data))
+                const { data } = await this.$http.get(this.source + t +'-summary.json',{crossdomain:true}).then(response => (this.summary = response.data))
             },
         },
         filters: {
