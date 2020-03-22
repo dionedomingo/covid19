@@ -28,14 +28,18 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
+if(window.location.host.includes('127.0.0.1')){
+    window.api_url = window.location.origin + '/public/mock-api';
+}else{
+    window.api_url = 'http://coronavirus-ph-api.now.sh';
+}
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component(
     'covid',
     require('./components/Covid.vue').default
 );
-
-
+console.log(window.location);
 const app = new Vue({
     el: '#app'
 });

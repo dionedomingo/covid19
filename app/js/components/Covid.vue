@@ -1,16 +1,7 @@
 <template>
     <div >
-       <b-row>
-            <b-col class="px-2">
-                <b-dropdown id="dropdown-1" :text="currentTimestamp | moment('hA MMMM Do YYYY')" class="" variant="primary"  split split-variant="outline-primary">
-                    <b-dropdown-item v-on:click="setTimestamp(i)" v-for="(i,k) in index"  v-bind:key="k">
-                        {{ i.timestamp | moment("hA MMMM Do YYYY") }}
-                    </b-dropdown-item>
-                </b-dropdown>
-            </b-col>
-        </b-row>
         <b-row>
-            <b-col cols="6" sm="6" md=4 lg=2 xl=1 class="text-center my-2 px-2" v-for="(c,k) in current" v-bind:key="k">
+            <b-col cols="6" sm="6" md=4 lg=2 xl=1 class="text-center mb-2 px-2" v-for="(c,k) in current" v-bind:key="k">
                 <div class="card shadow-sm py-2" v-b-popover.hover.bottom.html="popoverContent(c)" >
                     <b-row>
                         <b-col cols=12 class="pt-2">
@@ -48,9 +39,10 @@
         },
         props: ['source'] ,
         mounted() {
-            this.loadIndex();
-            this.loadTimestamp('latest');
-            console.log(this);
+
+            axios
+                .get(window.api_url+'/cases',{crossDomain:true})
+                .then(response => (this.current = response.data.reverse() ))
         },
         computed: {
             popoverConfig(c) {
@@ -68,11 +60,6 @@
             }
         },
         methods:{
-            setTimestamp: function(i){
-                this.currentTimestamp = i.timestamp;
-                this.loadTimestamp(i.timestamp);
-                this.loadSummary(i.timestamp);
-            },
             popoverContent: function(c){
 
                 let icons = {
@@ -121,11 +108,8 @@
                 return '<img class="img-fluid" width=20 src="https://lipis.github.io/flag-icon-css/flags/4x3/' + flagcode + '.svg" />';
 
             },
-            async loadIndex () {
-                const { data } = await this.$http.get(this.source + 'index.json',{crossdomain:true}).then(response => (this.index = response.data))
-            },
-            async loadTimestamp (t) {
-                const { data } = await this.$http.get(this.source + t +'.json',{crossdomain:true}).then(response => (this.current = response.data.reverse()))
+            async loadCases () {
+                const { data } = await this.$http.get(this.source ,{crossdomain:true}).then(response => (this.current = response.data.reverse()))
             },
             async loadSummary (t) {
                 const { data } = await this.$http.get(this.source + t +'-summary.json',{crossdomain:true}).then(response => (this.summary = response.data))

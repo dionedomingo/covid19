@@ -3,3 +3,4 @@ fonts
 public/css
 public/js
 package.lock
+yarn-error.log
