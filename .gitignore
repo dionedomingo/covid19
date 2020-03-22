@@ -3,3 +3,4 @@ node_modules
 fonts
 public/css
 public/js
+package.lock
