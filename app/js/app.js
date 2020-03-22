@@ -6,12 +6,23 @@
 
 require('./bootstrap');
 window.Vue = require('vue');
+
 import VueAxios from 'vue-axios'
 Vue.use(require('vue-moment'));
 Vue.use(VueAxios, axios)
 
 
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*' 
+axios.defaults.headers.common['origin'] = window.location.origin; 
 
+
+const cors = require('cors');
+/*
+Vue.use(cors({
+    origin: 'http://localhost:3333',
+    credentials: true
+  }));
+*/
 // Fontawesome
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -28,7 +39,7 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
-if(window.location.host.includes('127.0.0.1')){
+if(window.location.host.includes('127.0.0.11')){
     window.api_url = window.location.origin + '/public/mock-api';
 }else{
     window.api_url = 'https://coronavirus-ph-api.now.sh';

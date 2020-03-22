@@ -41,7 +41,17 @@
         mounted() {
 
             axios
-                .get(window.api_url+'/cases',{crossDomain:true})
+                .get(window.api_url+'/cases',
+                {
+
+                    crossorigin: true,
+                    headers: {
+                        'Content-Type': 'application/json;charset=UTF-8',
+                        'sec-fetch-site' : 'cross-site',
+                        'sec-fetch-mode' : 'cors',
+                        'sec-fetch-dest' : 'empty',
+                    }
+                })
                 .then(response => (this.current = response.data.reverse() ))
         },
         computed: {
@@ -109,7 +119,7 @@
 
             },
             async loadCases () {
-                const { data } = await this.$http.get(this.source ,{crossdomain:true}).then(response => (this.current = response.data.reverse()))
+                const { data } = await this.$http.get(this.source ,axiosConfig).then(response => (this.current = response.data.reverse()))
             },
             async loadSummary (t) {
                 const { data } = await this.$http.get(this.source + t +'-summary.json',{crossdomain:true}).then(response => (this.summary = response.data))
