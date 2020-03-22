@@ -40,18 +40,10 @@
         props: ['source'] ,
         mounted() {
 
+const cors = require('cors');
             axios
                 .get(window.api_url+'/cases',
-                {
-
-                    crossorigin: true,
-                    headers: {
-                        'Content-Type': 'application/json;charset=UTF-8',
-                        'sec-fetch-site' : 'cross-site',
-                        'sec-fetch-mode' : 'cors',
-                        'sec-fetch-dest' : 'empty',
-                    }
-                })
+                cors())
                 .then(response => (this.current = response.data.reverse() ))
         },
         computed: {

@@ -13,16 +13,17 @@ Vue.use(VueAxios, axios)
 
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*' 
-axios.defaults.headers.common['origin'] = window.location.origin; 
+axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept' 
 
+//axios.defaults.headers.common['origin'] = '*'; 
+//axios.defaults.headers.common[':authority:'] = 'coronavirus-ph-api.now.sh'; 
 
 const cors = require('cors');
 /*
 Vue.use(cors({
-    origin: 'http://localhost:3333',
-    credentials: true
+    origin: '*',
   }));
-*/
+  */
 // Fontawesome
 
 import { library } from '@fortawesome/fontawesome-svg-core'
