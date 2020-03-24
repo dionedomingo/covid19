@@ -34,17 +34,39 @@
                 index: [],
                 current: {},
                 summary: {},
-                currentTimestamp: 'Latest'
+                currentTimestamp: 'Latest',
+                timeseries: []
             }
         },
         props: ['source'] ,
         mounted() {
+            const cors = require('cors');
 
-const cors = require('cors');
-            axios
+            this.$http
                 .get(window.api_url+'/cases',
                 cors())
                 .then(response => (this.current = response.data.reverse() ))
+            
+
+            const url = 'https://pomber.github.io/covid19/timeseries.json';
+            const options = {
+                method: 'GET',
+                mode: 'no-cors',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    //'Content-Type': 'application/json;charset=UTF-8'
+                }
+            };
+            fetch(url, options)
+            .then(response => {
+               this.timeseries = response
+            });
+            this.$http
+                .get('https://pomber.github.io/covid19/timeseries.json',
+                cors())
+                .then(response => (this.timeseries = response.data.reverse() ))
+            
         },
         computed: {
             popoverConfig(c) {
@@ -116,6 +138,9 @@ const cors = require('cors');
             async loadSummary (t) {
                 const { data } = await this.$http.get(this.source + t +'-summary.json',{crossdomain:true}).then(response => (this.summary = response.data))
             },
+            async loadTimeSeries (){
+                const { data } = await this.$http.get('https://pomber.github.io/covid19/timeseries.json',{crossdomain:true}).then(response => (this.timeseries = response.data))
+            }
         },
         filters: {
             reverse(items) {
