@@ -7,10 +7,18 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-
 @import "~@fortawesome/fontawesome-pro/scss/fontawesome";
 @import "~@fortawesome/fontawesome-pro/scss/regular";
 @import "~@fortawesome/fontawesome-pro/scss/solid";
 @import "~@fortawesome/fontawesome-pro/scss/light";
 @import "~@fortawesome/fontawesome-pro/scss/duotone";
 
+
+.b-calendar{
+    .b-calendar-grid-body{
+        .btn{
+            padding-left:5px;
+            padding-right:5px;
+        }
+    }
+}
