@@ -7,7 +7,7 @@
             :max='new Date()'
             class="mb-2">
         </b-form-datepicker>
-       <multiselect v-model="countrySelected"  :max-height="250" :options="countryOptions" :multiple="true" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
+       <multiselect v-model="countrySelected"  :max-height="250" :options="countryOptions" :multiple="true" :close-on-select="true" :clear-on-select="true" :preserve-search="true" placeholder="Pick countries to show" label="name" track-by="name" :preselect-first="true">
             <template slot="selection" slot-scope="{ values, search, isOpen }">
                 <span class="multiselect__single_" v-if="values.length &amp;&amp; !isOpen">
                     <span class="multiselect__tag" v-for="(c,k) in values" v-bind:key="k">{{c.name}}</span>
@@ -39,9 +39,9 @@ const iso = require('iso-3166-1');
                 countryOptions:[
                    { name:"Philippines", code: "PHL"}, {name: "Denmark" , code: 'DNK' }
                 ],
-                countrySelected:[
+                countrySelected: (localStorage.countrySelected ? JSON.parse(localStorage.countrySelected) : [
                    { name:"Philippines", code: "PHL"}, {name: "Denmark" , code: 'DNK' }
-                ],
+                ]),
                 index: [],
                 current: {},
                 summary: {},
@@ -81,13 +81,15 @@ const iso = require('iso-3166-1');
                         code: code 
                     });
                 },this);
+            },
+            countrySelected(obj){
+                localStorage.countrySelected = JSON.stringify( obj );
             }
         },
         mounted() {
             const cors = require('cors');
             this.getLatest()
             this.getTimeseries()
-            
         },
         methods:{
              toCountry: function(code){
