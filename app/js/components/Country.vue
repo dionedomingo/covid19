@@ -1,8 +1,8 @@
 <template>
     <div >        
-        <h3 class="m-0" v-if="code">{{toCountry(code).country}}</h3>
+        <h3 class="my-1" v-if="code">{{toCountry(code).country}}</h3>
         <b-row>
-            <b-col cols="1" class="p-1" v-for="(d,i) in data" v-bind:key="i">
+            <b-col cols="6" sm="4" md="3" lg="2" xl="1" class="p-1" v-for="(d,i) in data" v-bind:key="i">
                 <div class="p-2 card" >
                     <span class="badge badge-primary">{{d.date | moment("ddd, MMM D")}}</span>
                     <div class="pt-1">

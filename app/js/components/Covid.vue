@@ -14,30 +14,8 @@
                 </span>
             </template>
         </multiselect>
-        <b-row>
-            <b-col cols="6" sm="6" md=4 lg=2 xl=1 class="text-center mb-2 px-2" v-for="(c,k) in current" v-bind:key="k">
-                <div class="card shadow-sm py-2"  v-b-popover.hover.bottom.html="popoverContent(c)" >
-                    <b-row>
-                        <b-col cols=12 class="pt-2">
-                            <font-awesome-icon v-if="c.status=='Died' && c.gender=='F' " :icon="['fad', 'coffin-cross']" size="2x" :style="{ color: '#DF5286' }" />
-                            <font-awesome-icon v-if="c.status=='Died' && c.gender=='M' " :icon="['fad', 'coffin-cross']" size="2x" :style="{ color: '#003366' }" />
-                            <font-awesome-icon v-if="c.gender=='F' && c.status!='Died'"  :icon="['fad', 'female']" fixed-width size="2x" :style="{ color: '#DF5286' }" />
-                            <font-awesome-icon v-if="c.gender=='M' && c.status!='Died'" :icon="['fad', 'male']"   fixed-width size="2x" :style="{ color: '#003366' }" />
-                            <font-awesome-layers v-if="c.gender=='T' || c.gender=='TBA'" full-width>
-                                <font-awesome-icon :icon="['fad', 'male']" size="2x" :style="{ color: '#555555' }" />
-                                <font-awesome-layers-text class="text-white" transform="down-2 shrink-8" value="?" />
-                            </font-awesome-layers>
-                        </b-col>
-                        <b-col>
-
-                            <b-badge pill variant="dark">#{{c.case_no}}</b-badge>
-                            <span class="px-2" v-html="nationalityToFlag(c.nationality)"></span>
-                        </b-col>
-                    </b-row>
-                </div>
-            </b-col>
-        </b-row>
-        <div class="px-2">
+        
+        <div class="p-2">
             <div v-if="timeseries.data.result">
                 <country v-if="countrySelected.some(item => item.code === code )" :code="code" :data="data" v-for="(data,code) in timeseries.data.result" v-bind:key="code"></country>       
             </div>
