@@ -7,7 +7,7 @@
             :max='new Date()'
             class="mb-2">
         </b-form-datepicker>
-       <multiselect v-model="countrySelected" :max-height="250" :options="countryOptions" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
+       <multiselect v-model="countrySelected"  :max-height="250" :options="countryOptions" :multiple="true" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
             <template slot="selection" slot-scope="{ values, search, isOpen }">
                 <span class="multiselect__single_" v-if="values.length &amp;&amp; !isOpen">
                     <span class="multiselect__tag" v-for="(c,k) in values" v-bind:key="k">{{c.name}}</span>
