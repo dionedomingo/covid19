@@ -6,7 +6,7 @@
                 <div class="p-2 card" >
                     <span class="badge badge-primary">{{d.date | moment("ddd, MMM D")}}</span>
                     <div class="pt-1">
-                         <div class="py-1" v-b-popover.hover.top="'Deaths'">
+                         <div class="py-1" v-b-popover.hover.top="'Confirmed'">
                             <font-awesome-icon :icon="['fad', 'male']" fixed-width class="text-danger" /> 
                             {{ d.confirmed }}
                         </div>
