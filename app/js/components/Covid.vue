@@ -21,7 +21,7 @@
             </div>
         </div>
       
-        <apexchart hidden width="500" type="bar" :options="chartOptions" :series="series"></apexchart>
+        <!-- <apexchart hidden width="500" type="bar" :options="chartOptions" :series="series"></apexchart> -->
     </div>
 </template>
 
@@ -57,6 +57,7 @@ const iso = require('iso-3166-1');
                     timeseries: 'https://covidapi.info/api/v1/global/timeseries',
                     latest: 'https://covidapi.info/api/v1/latest-date',
                 },
+                // TODO: Chart stuff
                 chartOptions: {
                     chart: {
                     id: 'vuechart-example',

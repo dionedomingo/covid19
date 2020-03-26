@@ -4,28 +4,22 @@
         <b-row>
             <b-col  class="p-1" v-for="(d,i) in data" v-bind:key="i">
                 <div class="badge w-100 badge-primary">{{d.date | moment("ddd, MMM D")}}</div>
-                <div class="p-2 mt-1 card border-0 shadow-sm" >
-                  
-                    <div class="pt-1">
-                         <div class="py-1" v-b-popover.hover.top="'+' + confirmedPop(d,i)">
-                            <font-awesome-icon size="1x" :icon="['fad', 'male']" fixed-width :style="{ color: '#23395d' }" /> 
-                            <span class="float-right"> <font-awesome-icon v-if="confirmedPop(d,i)" :icon="['fad', 'caret-up']" :style="{ color: 'red' }" />  {{ d.confirmed }}</span>
-                        </div>
-                </div>
-            </div>
-            <div class="p-2 mt-1 card border-0 shadow-sm" >
-                  <div class="">
-                        <div class="py-1" v-b-popover.hover.top="'+' + deathsPop(d,i)">
-                            <font-awesome-icon size="1x" :icon="['fad', 'coffin-cross']" fixed-width :style="{ color: '#654321' }" /> 
-                            
-                            <span class="float-right"> <font-awesome-icon v-if="deathsPop(d,i)" :icon="['fad', 'caret-up']" :style="{ color: 'red' }" />  {{ d.deaths }}</span>
-                        </div>
-                        <div hidden class="py-1" v-b-popover.hover.top="'Recovered'">
-                            <font-awesome-icon :icon="['fad', 'life-ring']" fixed-width class="text-info"  /> 
-                            {{ d.recovered }}
-                        </div>
+                <b-card no-body class="p-2 my-1 border-0 shadow-sm">
+                    <div class="py-1" v-b-popover.hover.top="'+' + confirmedPop(d,i)">
+                        <font-awesome-icon size="1x" :icon="['fad', 'male']" fixed-width :style="{ color: '#23395d' }" /> 
+                        <span class="float-right"> <font-awesome-icon v-if="confirmedPop(d,i)" :icon="['fad', 'caret-up']" :style="{ color: 'red' }" />  {{ d.confirmed }}</span>
                     </div>
-                </div>
+                </b-card>
+                <b-card no-body class="p-2 shadow-sm border-0">
+                    <div class="py-1" v-b-popover.hover.top="'+' + deathsPop(d,i)">
+                        <font-awesome-icon size="1x" :icon="['fad', 'coffin-cross']" fixed-width :style="{ color: '#654321' }" /> 
+                        <span class="float-right"> <font-awesome-icon v-if="deathsPop(d,i)" :icon="['fad', 'caret-up']" :style="{ color: 'red' }" />  {{ d.deaths }}</span>
+                    </div>
+                    <div hidden class="py-1" v-b-popover.hover.top="'Recovered'">
+                        <font-awesome-icon :icon="['fad', 'life-ring']" fixed-width class="text-info"  /> 
+                        {{ d.recovered }}
+                    </div>
+                </b-card>
             </b-col> 
         </b-row>
     </div>
