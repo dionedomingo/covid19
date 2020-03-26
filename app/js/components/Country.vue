@@ -1,20 +1,26 @@
 <template>
-    <div >        
-        <h3 class="my-1" v-if="code">{{toCountry(code).country}}</h3>
+    <div >
+        <h4 class="my-1" v-if="code"><img :src="flag(code)" />  {{toCountry(code).country}} </h4>
         <b-row>
-            <b-col cols="6" sm="4" md="3" lg="2" xl="1" class="p-1" v-for="(d,i) in data" v-bind:key="i">
-                <div class="p-2 card" >
-                    <span class="badge badge-primary">{{d.date | moment("ddd, MMM D")}}</span>
+            <b-col  class="p-1" v-for="(d,i) in data" v-bind:key="i">
+                <div class="badge w-100 badge-primary">{{d.date | moment("ddd, MMM D")}}</div>
+                <div class="p-2 mt-1 card border-0 shadow-sm" >
+                  
                     <div class="pt-1">
-                         <div class="py-1" v-b-popover.hover.top="'Confirmed'">
-                            <font-awesome-icon :icon="['fad', 'male']" fixed-width class="text-danger" /> 
-                            {{ d.confirmed }}
+                         <div class="py-1" v-b-popover.hover.top="'+' + confirmedPop(d,i)">
+                            <font-awesome-icon size="1x" :icon="['fad', 'male']" fixed-width :style="{ color: '#23395d' }" /> 
+                            <span class="float-right"> <font-awesome-icon v-if="confirmedPop(d,i)" :icon="['fad', 'caret-up']" :style="{ color: 'red' }" />  {{ d.confirmed }}</span>
                         </div>
-                        <div class="py-1" v-b-popover.hover.top="'Deaths'">
-                            <font-awesome-icon :icon="['fad', 'coffin-cross']" fixed-width :style="{ color: '#333333' }" /> 
-                            {{ d.deaths }}
+                </div>
+            </div>
+            <div class="p-2 mt-1 card border-0 shadow-sm" >
+                  <div class="">
+                        <div class="py-1" v-b-popover.hover.top="'+' + deathsPop(d,i)">
+                            <font-awesome-icon size="1x" :icon="['fad', 'coffin-cross']" fixed-width :style="{ color: '#654321' }" /> 
+                            
+                            <span class="float-right"> <font-awesome-icon v-if="deathsPop(d,i)" :icon="['fad', 'caret-up']" :style="{ color: 'red' }" />  {{ d.deaths }}</span>
                         </div>
-                        <div class="py-1" v-b-popover.hover.top="'Recovered'">
+                        <div hidden class="py-1" v-b-popover.hover.top="'Recovered'">
                             <font-awesome-icon :icon="['fad', 'life-ring']" fixed-width class="text-info"  /> 
                             {{ d.recovered }}
                         </div>
@@ -37,6 +43,23 @@
         mounted() {
         },
         methods: {
+            flag: function(code){
+                return 'https://www.countryflags.io/'+this.toCountry(code).alpha2+'/flat/32.png';
+            },
+            deathsPop: function(d,i){
+                let newDeaths = 0;
+                if(i){
+                    newDeaths = d.deaths - this.data[i-1].deaths;
+                }
+                return newDeaths 
+            },
+            confirmedPop: function(d,i){
+                let newConf = 0;
+                if(i){
+                    newConf = d.confirmed - this.data[i-1].confirmed;
+                }
+                return newConf 
+            },
             toCountry: function(code){
                 const o = {
                     country: 'Unknown'

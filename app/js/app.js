@@ -26,10 +26,10 @@ Vue.use(cors({
 // Fontawesome
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret,faFemale,faMale,faGenderless, faCoffinCross,faLifeRing} from '@fortawesome/pro-duotone-svg-icons'
+import { faUserSecret,faFemale,faMale,faGenderless, faCoffinCross,faLifeRing,faCaretUp} from '@fortawesome/pro-duotone-svg-icons'
 import { FontAwesomeIcon,FontAwesomeLayers,FontAwesomeLayersText} from '@fortawesome/vue-fontawesome'
 import { BootstrapVue, IconsPlugin,FormDatepickerPlugin } from 'bootstrap-vue'
-library.add(faUserSecret,faFemale,faMale,faGenderless,faCoffinCross,faLifeRing)
+library.add(faUserSecret,faFemale,faMale,faGenderless,faCoffinCross,faLifeRing,faCaretUp)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
 Vue.component('font-awesome-layers-text', FontAwesomeLayersText)

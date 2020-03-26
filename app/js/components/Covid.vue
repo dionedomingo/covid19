@@ -40,7 +40,11 @@ const iso = require('iso-3166-1');
                    { name:"Philippines", code: "PHL"}, {name: "Denmark" , code: 'DNK' }
                 ],
                 countrySelected: (localStorage.countrySelected ? JSON.parse(localStorage.countrySelected) : [
-                   { name:"Philippines", code: "PHL"}, {name: "Denmark" , code: 'DNK' }
+                    {"name":"Philippines","code":"PHL"},
+                    {"name":"Denmark","code":"DNK"},
+                    {"name":"China","code":"CHN"},
+                    {"name":"Italy","code":"ITA"},
+                    {"name":"Islamic Republic of Iran","code":"IRN"}
                 ]),
                 index: [],
                 current: {},
